@@ -150,23 +150,12 @@ class ModWL_Statistics_Module_Helper
 
     }
 
-    /* Single Data */
-    public function test ($data)
-    {
-        $aaa = $data->fields;
-
-        foreach ($aaa as $testi)
-        {
-           $newTest = $testi->properties;
-        }
-        return $newTest;
-    }
 
     public function getLivedataParams ($params)
     {
         /// Add Module Parameter
         jimport( 'joomla.application.module.helper' );
-        $module = JModuleHelper::getModule('wl_livedata_module');
+        $module = JModuleHelper::getModule('wl_statistics_module');
         $module_id = $module->id;
         $db = JFactory::getDbo();
         $query = $db->getQuery(true);
@@ -179,7 +168,7 @@ class ModWL_Statistics_Module_Helper
     }
 
     // Create Chart.js Object
-    public function chartJs($count,$data,$dataset,$testi)
+    public function chartJs($count,$data,$dataset)
     {
 
         // Add JS Parameter

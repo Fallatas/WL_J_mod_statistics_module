@@ -20,7 +20,7 @@
 
 <field name="properties"
        type="text"
-       default="Videomaker?"
+       default="1"
        label="MOD_WL_STATISTICS_MODULE_DATA_LABEL"
        description="MOD_WL_STATISTICS_MODULE_DATA_DESC"
        filter="string"
