@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+
+<field
+        name="labeltext"
+        type="text"
+        default="Some text"
+        label="MOD_WL_LIVEDATA_MODULE_DATALABEL1_LABEL"
+        description="MOD_WL_LIVEDATA_MODULE_DATALABEL1_DESC"
+        size="10"
+/>
+
+<field name="labeltextcolor"
+       type="color"
+       default="#0a0a0a"
+       format="rgba"
+       label="MOD_WL_LIVEDATA_MODULE_LABEL_COLOR_LABEL"
+       description="MOD_WL_LIVEDATA_MODULE_LABEL_COLOR_DESC"
+/>
+
+<field name="properties"
+       type="text"
+       default="Videomaker?"
+       label="MOD_WL_LIVEDATA_MODULE_DATA_LABEL"
+       description="MOD_WL_LIVEDATA_MODULE_DATA_DESC"
+       filter="string"
+/>
+
+</form>
