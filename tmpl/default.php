@@ -16,4 +16,9 @@ JHtml::_('jQuery.Framework');
 ?>
 <div style="width:<?php echo $data->chartsize . '%'; ?>">
     <canvas id="myChart" width="<?php echo $data->chartwidth . 'px'; ?>" height="<?php echo $data->chartheight . 'px'; ?>"></canvas>
+    <?php
+    echo "<pre>";
+    print_r($params);
+    echo "</pre>";
+    ?>
 </div>

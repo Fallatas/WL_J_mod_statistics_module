@@ -75,7 +75,8 @@
                     size="10"
             />
 
-            <field name="headlinetextcolor"
+            <field
+                   name="headlinetextcolor"
                    type="color"
                    default="#0a0a0a"
                    format="rgba"
@@ -83,6 +84,14 @@
                    description="MOD_WL_STATISTICS_MODULE_HEADLINE_COLOR_DESC"
             />
 
+            <field
+                    name="labels"
+                    type="text"
+                    default="Januar"
+                    label="MOD_WL_STATISTICS_MODULE_LABELNAME_LABEL"
+                    description="MOD_WL_STATISTICS_MODULE_LABELNAME_DESC"
+                    size="10"
+            />
 
             <field
                     name= "fields"
@@ -118,7 +127,6 @@
                 <option value="true">JYES</option>
                 <option value="false">JNO</option>
             </field>
-
 
         </fieldset>
     </fields>

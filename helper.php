@@ -16,7 +16,7 @@ defined('_JEXEC') or die;
  * @since  Version 1.0.0.0
  */
 class ModWL_Statistics_Module_Helper
-{   
+{
 
     // Detects Users
     public function getUsers()
@@ -135,20 +135,71 @@ class ModWL_Statistics_Module_Helper
      * @param $params  array  The params attributes
      * @return string  dataset of params
      */
-    public function CreateNewDataSets($params){
 
-        $fields = $params->get('fields');
+    public function CreateNewDataSets($params)
+    {
 
-        $dataset ='';
+        /* Create data arrays */
+
+        $fieldParams = $params->get('fields');
+
+        $labels = [];
+        $backgroundColors = [];
+        $borderColors = [];
+
+        foreach ($fieldParams as $singleParam)
+        {
+            $labels[] = $singleParam->labeltext;
+            $backgroundColors [] = $singleParam->labeltextcolor;
+            $borderColors [] = $singleParam->bordercolor;
+        }
+
+
+        /* Get parameters content */
+
+
+        $fields  = (array) $params->get('fields');
+
+        $newArray = [];
 
         foreach ($fields as $field)
         {
-            $dataset .= "{label:'$field->labeltext',backgroundColor:'$field->labeltextcolor',data:[$field->properties]},";
+            $numbervalues = [];
+
+            foreach ((array) $field->fieldname as $numbervalue)
+            {
+                $numbervalues[] = $numbervalue->mynumbervalue;
+            }
+
+            array_push($newArray,$numbervalues);
+
+
         }
 
-        return $dataset;
 
+        /* Create Datasets */
+
+
+        $counter = count($numbervalues) - 1;
+
+        $data = [];
+
+        for($i = 0; $i <= $counter; $i++)
+        {
+            array_push($data, '{label:'. '\'' . json_encode($labels[$i]) . '\'' . ','
+                . 'backgroundColor:'. '\'' . json_encode($backgroundColors [$i]) . '\'' . ','
+                . 'borderColor:'. '\'' . json_encode($borderColors [$i]) . '\'' . ','
+                . 'data:' . json_encode($newArray[$i]) . '}');
+        }
+
+
+        $formdata = str_replace('"', '', implode(',', $data));
+
+
+
+        return $formdata;
     }
+
 
 
     public function getLivedataParams ($params)
@@ -168,7 +219,7 @@ class ModWL_Statistics_Module_Helper
     }
 
     // Create Chart.js Object
-    public function chartJs($count,$data,$dataset)
+    public function chartJs($count,$data,$datasets)
     {
 
         // Add JS Parameter
@@ -183,7 +234,7 @@ class ModWL_Statistics_Module_Helper
        data: {
         labels: ['January','February','March','April','May','June','July'],
 
-        datasets: [$dataset]
+        datasets: [$datasets]
 
 
     },
@@ -214,58 +265,10 @@ class ModWL_Statistics_Module_Helper
             }]
         }
     }
-
-
     };
-console.log(myChartObject);
-var onlineCount = $count;
-var dataCount = 20;
-
-var liveData = {
-    online: [],
-    time: []
-};
-
-for (var i = 0; i < dataCount; i++){
-    liveData.online.push('');
-    liveData.time.push('');
-}
-
-function onlineUserEmit(){
-
-    var date = new Date();
-    var hours = date.getHours();
-    var minutes = date.getMinutes();
-    var seconds = date.getSeconds();
-    
-    var totalTime = hours + ':' + minutes + ':' + seconds;
-
-    if (liveData.time.length >= dataCount) {
-        liveData.time.shift();
-    }
-
-    if (liveData.online.length >= dataCount) {
-        liveData.online.shift();
-    }
-
-    liveData.online.push(onlineCount);
-    liveData.time.push(totalTime);
-    
-
-}
 
 var chart = new Chart(myChartObject, chartData);
 
-chart.data.labels = liveData.time;
-chart.data.datasets[0].data = liveData.online;
-
-
-onlineUserEmit();
-
-setInterval(function () {
-    onlineUserEmit();
-    chart.update();
-},1000);
 
    
         });");

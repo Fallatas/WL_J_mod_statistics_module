@@ -1,29 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form>
 
-<field
-        name="labeltext"
-        type="text"
-        default="Some text"
-        label="MOD_WL_STATISTICS_MODULE_DATALABEL1_LABEL"
-        description="MOD_WL_STATISTICS_MODULE_DATALABEL1_DESC"
-        size="10"
-/>
+    <field
+            name="labeltext"
+            type="text"
+            default="Some text"
+            label="MOD_WL_STATISTICS_MODULE_DATALABEL1_LABEL"
+            description="MOD_WL_STATISTICS_MODULE_DATALABEL1_DESC"
+            size="10"
+    />
 
-<field name="labeltextcolor"
-       type="color"
-       default="#0a0a0a"
-       format="rgba"
-       label="MOD_WL_STATISTICS_MODULE_LABEL_COLOR_LABEL"
-       description="MOD_WL_STATISTICS_MODULE_LABEL_COLOR_DESC"
-/>
+    <field name="labeltextcolor"
+           type="color"
+           default="#0a0a0a"
+           format="rgba"
+           label="MOD_WL_STATISTICS_MODULE_LABEL_COLOR_LABEL"
+           description="MOD_WL_STATISTICS_MODULE_LABEL_COLOR_DESC"
+    />
 
-<field name="properties"
-       type="text"
-       default="1"
-       label="MOD_WL_STATISTICS_MODULE_DATA_LABEL"
-       description="MOD_WL_STATISTICS_MODULE_DATA_DESC"
-       filter="string"
-/>
+    <field name="bordercolor"
+           type="color"
+           default="#0a0a0a"
+           format="rgba"
+           label="MOD_WL_STATISTICS_MODULE_LABEL_COLOR_LABEL"
+           description="MOD_WL_STATISTICS_MODULE_LABEL_COLOR_DESC"
+    />
+
+    <field name="properties"
+           type="text"
+           default="1"
+           label="MOD_WL_STATISTICS_MODULE_DATA_LABEL"
+           description="MOD_WL_STATISTICS_MODULE_DATA_DESC"
+           filter="string"
+    />
+
+
+    <field
+            name="fieldname"
+            type="subform"
+            label="Subform Field"
+            description="Subform Field Description"
+            multiple="true"
+            buttons="add,remove"
+            min="3"
+            max="10"
+    >
+        <form>
+
+            <field name="mynumbervalue"
+                   type="number"
+                   default="1"
+                   label="MOD_WL_STATISTICS_MODULE_DATA_LABEL"
+                   description="MOD_WL_STATISTICS_MODULE_DATA_DESC"
+                   min="3"
+                   max="10"
+                   step="1"
+            />
+
+        </form>
+
+    </field>
 
 </form>

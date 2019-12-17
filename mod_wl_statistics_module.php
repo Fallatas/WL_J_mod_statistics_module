@@ -14,11 +14,10 @@ require_once __DIR__ . '/helper.php';   // Helper
 
 JHTML::_('script', 'mod_wl_statistics_module/scripts.js', array('version' => 'auto', 'relative' => true));
 
-
+    $datasets = ModWL_Statistics_Module_Helper::CreateNewDataSets ($params);
 
     $data = ModWL_Statistics_Module_Helper::getLivedataParams ($params);
 
-    $datasets = ModWL_Statistics_Module_Helper::CreateNewDataSets ($params);
     $allusers = ModWL_Statistics_Module_Helper::getUsers();
     $articles = ModWL_Statistics_Module_Helper::getArticles();
     $style = ModWL_Statistics_Module_Helper::getStyleParams();
