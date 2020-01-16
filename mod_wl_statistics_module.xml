@@ -104,7 +104,7 @@
                     description= "MOD_WL_STATISTICS_MODULE_FORMFIELD_DESC"
                     type= "subform"
                     label= "MOD_WL_STATISTICS_MODULE_FORMFIELD_LABEL"
-                    min= "1"
+                    min= "3"
                     max= "12"
                     required= "true"
                     formsource= "modules/mod_wl_statistics_module/formfield.xml"
