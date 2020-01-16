@@ -65,32 +65,38 @@
             </field>
 
 
+            <field
+                    name="labelsfields"
+                    type="subform"
+                    label="MOD_WL_STATISTICS_MODULE_DIAGRAMMNAME_LABEL"
+                    description="MOD_WL_STATISTICS_MODULE_DIAGRAMMNAME_DESC"
+                    multiple="true"
+                    buttons="add,remove"
+                    min="3"
+                    max="10"
+            >
+                <form>
+
+                    <field
+                            name="labels"
+                            type="text"
+                            default="Januar"
+                            label="MOD_WL_STATISTICS_MODULE_DIAGRAMMHEADLINE_LABEL"
+                            description="MOD_WL_STATISTICS_MODULE_DIAGRAMMHEADLINE_DESC"
+                            size="10"
+                    />
+
+                </form>
+
+            </field>
 
             <field
-                    name="headline"
-                    type="text"
-                    default="Nutzer der letzten 20 Sekunden."
-                    label="MOD_WL_STATISTICS_MODULE_HEADLINE_LABEL"
-                    description="MOD_WL_STATISTICS_MODULE_HEADLINE_DESC"
-                    size="10"
-            />
-
-            <field
-                   name="headlinetextcolor"
-                   type="color"
-                   default="#0a0a0a"
-                   format="rgba"
-                   label="MOD_WL_STATISTICS_MODULE_HEADLINE_COLOR_LABEL"
-                   description="MOD_WL_STATISTICS_MODULE_HEADLINE_COLOR_DESC"
-            />
-
-            <field
-                    name="labels"
-                    type="text"
-                    default="Januar"
-                    label="MOD_WL_STATISTICS_MODULE_LABELNAME_LABEL"
-                    description="MOD_WL_STATISTICS_MODULE_LABELNAME_DESC"
-                    size="10"
+                    name="headlinetextcolor"
+                    type="color"
+                    default="#0a0a0a"
+                    format="rgba"
+                    label="MOD_WL_STATISTICS_MODULE_HEADLINE_COLOR_LABEL"
+                    description="MOD_WL_STATISTICS_MODULE_HEADLINE_COLOR_DESC"
             />
 
             <field

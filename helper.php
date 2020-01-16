@@ -18,116 +18,33 @@ defined('_JEXEC') or die;
 class ModWL_Statistics_Module_Helper
 {
 
-    // Detects Users
-    public function getUsers()
-    {
-
-        // Get a db connection.
-        $db = JFactory::getDbo();
-
-        //Create Query
-        $query = $db
-            ->getQuery(true)
-            ->select($db->qn("name"))
-            ->from($db->qn('#__users'));
-
-        $db->setQuery($query);
-        $column = $db->loadColumn ();
-
-        // using the data
-        $countData = count($column);
-        return $countData;
-    }
-
-
     /**
-     * Show online count
+     * CreateNewLabels
      *
-     * @return  array  The number of Users and Guests online.
-     *
-     * Adapted from Joomla mod_whosonline
-     * @copyright   Copyright (C) 2005 - 2019 Open Source Matters, Inc. All rights reserved.
-     * @license     GNU General Public License version 2 or later; see LICENSE.txt
-     *
-     * @since   1.5
-     **/
+     * @param $params  array  The params attributes
+     * @return string  dataset of params
+     */
 
-    public static function getOnlineCount()
-    {
-        $db = JFactory::getDbo();
-
-        // Calculate number of guests and users
-        $result	     = array();
-        $user_array  = 0;
-        $guest_array = 0;
-
-        $whereCondition = JFactory::getConfig()->get('shared_session', '0') ? 'IS NULL' : '= 0';
-
-        $query = $db->getQuery(true)
-            ->select($db->qn(array('guest', 'client_id')))
-            ->from('#__session')
-            ->where('client_id ' . $whereCondition);
-        $db->setQuery($query);
-
-        try
-        {
-            $sessions = (array) $db->loadObjectList();
-        }
-        catch (RuntimeException $e)
-        {
-            $sessions = array();
-        }
-
-        if (count($sessions))
-        {
-            foreach ($sessions as $session)
-            {
-                // If guest increase guest count by 1
-                if ($session->guest == 1)
-                {
-                    $guest_array ++;
-                }
-
-                // If member increase member count by 1
-                if ($session->guest == 0)
-                {
-                    $user_array ++;
-                }
-            }
-        }
-
-        $result['user']  = $user_array;
-        $result['guest'] = $guest_array;
-
-        $totalNumber = $result['user']  = $user_array + $result['guest'] = $guest_array;
-        return $totalNumber;
-    }
-
-
-
-
-    // detects Articles
-    public function getArticles()
+    public function CreateNewLabels($params)
     {
 
-        // Get a db connection.
-        $db = JFactory::getDbo();
+        $fields  = (array) $params->get('labelsfields');
 
-        //Create Query
-        $query = $db
-            ->getQuery(true)
-            ->select("title")
-            ->from($db->quoteName('#__content'));
+        $textlabels = [];
 
-        $db->setQuery($query);
-        $column = $db->loadColumn ();
+        foreach ($fields as $field){
+            $textlabels [] = $field->labels;
+        }
 
-        // using the data
-        $countArticles = count($column);
+        $labeldata = json_encode($textlabels);
+        $labeldata = str_replace('"','\'',$labeldata);
 
-        return $countArticles;
+        $newdata = 'labels:' . $labeldata;
 
+
+        return $newdata;
     }
+
 
     /**
      * CreateNewDataSets
@@ -173,7 +90,6 @@ class ModWL_Statistics_Module_Helper
 
             array_push($newArray,$numbervalues);
 
-
         }
 
 
@@ -181,6 +97,8 @@ class ModWL_Statistics_Module_Helper
 
 
         $counter = count($numbervalues) - 1;
+
+        print_r($counter);
 
         $data = [];
 
@@ -201,8 +119,15 @@ class ModWL_Statistics_Module_Helper
     }
 
 
+    /**
+     * GetLiveDataParams
+     *
+     * @param $params  array  The params attributes
+     * @return string  database of params
+     */
 
-    public function getLivedataParams ($params)
+
+    public function GetLivedataParams ($params)
     {
         /// Add Module Parameter
         jimport( 'joomla.application.module.helper' );
@@ -218,8 +143,17 @@ class ModWL_Statistics_Module_Helper
         return $moduleparams;
     }
 
+
+    /**
+     * chartJs
+     *
+     * @param $params  array  The params attributes
+     * @return string  Oject return
+     */
+
     // Create Chart.js Object
-    public function chartJs($count,$data,$datasets)
+
+    public function chartJs($data,$datasets,$labels)
     {
 
         // Add JS Parameter
@@ -232,11 +166,9 @@ class ModWL_Statistics_Module_Helper
 
                 type: `$data->type`,
        data: {
-        labels: ['January','February','March','April','May','June','July'],
+        $labels,
 
         datasets: [$datasets]
-
-
     },
     options: {
         title: {
@@ -259,7 +191,6 @@ class ModWL_Statistics_Module_Helper
                         if (Math.floor(label) === label) {
                             return label;
                         }
-
                     },
                 }
             }]
@@ -267,18 +198,10 @@ class ModWL_Statistics_Module_Helper
     }
     };
 
-var chart = new Chart(myChartObject, chartData);
-
-
-   
-        });");
+    var chart = new Chart(myChartObject, chartData);
+    
+     });");
 
     }
-
-    public function getStyleParams()
-    {
-
-    }
-
 
 }
